@@ -5,5 +5,6 @@ module.exports = {
     authFailed: "Authentication failed",
     messageBall: "You can use these ball in",
     ballUsing: "ball using in",
-    size: "size less than zero"
+    size: "size less than zero",
+    existEmail: "Email already exist"
 }

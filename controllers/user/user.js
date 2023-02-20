@@ -47,6 +47,14 @@ router.post('/addVolumeOfBalls',utilToken.validation, async (req, res) => {
 
 router.post('/createUser', async (req, res) => {
     try {
+        const checkEmailExist = await user.getUserDetails(req.body.email)
+        if(checkEmailExist){
+            return res.status(200).json({
+                status: false,
+                message: constants.existEmail,
+                data: null
+            })
+        }
         req.body.password = await util.genratehashPassword(req.body.password)
         const result = await user.createUser(req.body)
         return res.status(200).json({

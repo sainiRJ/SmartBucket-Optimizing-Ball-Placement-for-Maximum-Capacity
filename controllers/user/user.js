@@ -77,7 +77,7 @@ router.post('/signIn', async (req, res) => {
         const getUserDetails = await user.getUserDetails(req.body.email)
         const comparePasswordHash = await util.comparePasswordHash(req.body.password, getUserDetails.password)
         if (!comparePasswordHash) {
-            return res.status(400).json({
+            return res.status(200).json({
                 status: false,
                 message: constants.authFailed,
                 data: null
@@ -180,7 +180,6 @@ router.post('/suggestion', utilToken.validation, async (req, res) => {
             const createUserSession = await user.createUserSession(session)
         }
         if (!suggestionBucket) {
-            
             suggestionBucket = constants.noBucketFound
             return res.status(200).json({
                 status: false,
@@ -222,4 +221,6 @@ router.post('/logout', utilToken.validation, async (req, res) => {
         })
     }
 })
+
+
 module.exports = router
